@@ -1,6 +1,14 @@
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+/**
+ * Componente Layout
+ * 
+ * Estructura principal de la aplicación autenticada.
+ * Muestra el sidebar de navegación lateral.
+ * El sidebar adapta su contenido al rol del usuario.
+ */
+
 export default function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -12,7 +20,7 @@ export default function Layout() {
 
   return (
     <div className="flex h-screen" style={{ backgroundColor: '#FFF8F3' }}>
-      {/* Sidebar */}
+          {/* Todo el menu lateral */}
       <aside className="w-56 flex flex-col" style={{ backgroundColor: '#F97316', minHeight: '100vh' }}>
         <div className="px-6 py-6 border-b border-orange-400">
           <h1 className="text-white font-semibold text-lg tracking-wide">Apptestados</h1>
@@ -65,7 +73,6 @@ export default function Layout() {
         </div>
       </aside>
 
-      {/* Contenido */}
       <main className="flex-1 overflow-auto" style={{ backgroundColor: '#FFF8F3' }}>
         <Outlet />
       </main>

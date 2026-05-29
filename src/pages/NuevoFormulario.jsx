@@ -12,6 +12,7 @@ export default function NuevoFormulario() {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
 
+  //cargar tipos de formulario
   useEffect(() => {
     api.get('/tipos-formulario').then(res => setTipos(res.data));
   }, []);
@@ -27,7 +28,7 @@ export default function NuevoFormulario() {
   const handleRespuesta = (campoId, valor) => {
     setRespuestas(prev => ({ ...prev, [campoId]: valor }));
   };
-
+  //envio del formulario
   const handleSubmit = async (estado) => {
     setError('');
 
@@ -40,7 +41,7 @@ export default function NuevoFormulario() {
       setError('Debes seleccionar un tipo de formulario.');
       return;
     }
-
+    //validar campos obligatorios
     const camposObligatoriosVacios = campos.filter(c => 
       c.obligatorio && (!respuestas[c.id] || respuestas[c.id].toString().trim() === '')
     );

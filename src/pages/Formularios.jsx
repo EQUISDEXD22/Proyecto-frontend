@@ -17,6 +17,7 @@ export default function Formularios() {
   const [loading, setLoading] = useState(true);
   const [filtroEstado, setFiltroEstado] = useState('');
 
+  //recarga de formularios cuando se aplica filtro
   useEffect(() => { cargarFormularios(); }, [filtroEstado]);
 
   const cargarFormularios = async () => {

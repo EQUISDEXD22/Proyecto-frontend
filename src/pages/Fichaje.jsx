@@ -51,6 +51,7 @@ export default function Fichaje() {
         </div>
       </div>
 
+      {/* Historial de fichajes */}
       <div className="bg-white rounded-lg border border-orange-100 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-50">
           <h3 className="text-sm font-medium text-gray-600">Historial</h3>

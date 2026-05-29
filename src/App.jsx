@@ -9,6 +9,18 @@ import Fichaje from './pages/Fichaje';
 import TiposFormulario from './pages/TiposFormulario';
 import Layout from './components/Layout';
 
+/**
+ * Define las rutas usando React Router.
+ * 
+ * Estructura de rutas:
+ * /login - Login (pública)
+ * / - Dashboard (autenticada)
+ * /formularios - Listado de formularios (autenticada)
+ * /formularios/nuevo - Crear formulario (autenticada)
+ * /fichaje - Fichaje (autenticada)
+ * /usuarios - Gestión de usuarios (solo admin)
+ * /tipos-formulario → Tipos de formulario (solo admin)
+ */
 function RutaProtegida({ children }) {
   const { user, loading } = useAuth();
   if (loading) return <div className="flex items-center justify-center h-screen">Cargando...</div>;
@@ -35,6 +47,7 @@ export default function App() {
         <Route path="formularios" element={<Formularios />} />
         <Route path="formularios/nuevo" element={<NuevoFormulario />} />
         <Route path="fichaje" element={<Fichaje />} />
+        {/* Rutas de administrador */}
         <Route path="usuarios" element={<RutaAdmin><Usuarios /></RutaAdmin>} />
         <Route path="tipos-formulario" element={<RutaAdmin><TiposFormulario /></RutaAdmin>} />
       </Route>
