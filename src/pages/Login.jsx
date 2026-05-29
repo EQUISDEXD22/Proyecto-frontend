@@ -27,7 +27,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#FFF8F3' }}>
       <div className="bg-white rounded-lg shadow-sm border border-orange-100 p-8 w-full max-w-sm">
         <div className="mb-8">
-          <h1 className="text-2xl font-semibold text-gray-800">FormPolicía</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">Apptestados</h1>
           <p className="text-gray-400 text-sm mt-1">Inicia sesión para continuar</p>
         </div>
 
