@@ -41,6 +41,26 @@ export default function Formularios() {
     }
   };
 
+  //PDF aqui
+  const exportarPdf = async (id, titulo) => {
+  try {
+    const res = await api.get(`/formularios/${id}/pdf`, {
+      responseType: 'blob',
+    });
+
+    const url = window.URL.createObjectURL(new Blob([res.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `formulario_${id}.pdf`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('Error al exportar PDF:', err);
+  }
+};
+
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">
@@ -112,6 +132,7 @@ export default function Formularios() {
                           </button>
                         </>
                       )}
+                      <button onClick={() => exportarPdf(f.id, f.titulo)} className="text-xs text-orange-500 hover:text-orange-700 transition">PDF</button>
                     </td>
                   )}
                 </tr>
