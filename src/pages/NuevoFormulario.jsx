@@ -11,6 +11,8 @@ export default function NuevoFormulario() {
   const [respuestas, setRespuestas] = useState({});
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState('');
+  const [imagenes, setImagenes] = useState([]);
+
 
   //cargar tipos de formulario
   useEffect(() => {
@@ -27,6 +29,11 @@ export default function NuevoFormulario() {
 
   const handleRespuesta = (campoId, valor) => {
     setRespuestas(prev => ({ ...prev, [campoId]: valor }));
+  };
+
+  //envio imagenes
+  const handleImagenes = (e) => {
+    setImagenes(Array.from(e.target.files));
   };
   //envio del formulario
   const handleSubmit = async (estado) => {
@@ -51,22 +58,31 @@ export default function NuevoFormulario() {
       return;
     }
 
+    //modificado envio v1.2
     setEnviando(true);
     try {
       const res = await api.post('/formularios', {
-        titulo,
-        tipo_formulario_id: parseInt(tipoSeleccionado),
-        respuestas: campos.map(c => ({
-          campo_id: c.id,
-          valor: respuestas[c.id] || '',
-        })),
+      titulo,
+      tipo_formulario_id: parseInt(tipoSeleccionado),
+      respuestas: campos.map(c => ({
+        campo_id: c.id,
+        valor: respuestas[c.id] || '',
+      })),
+    });
+
+    if (imagenes.length > 0) {
+      const formData = new FormData();
+      imagenes.forEach(img => formData.append('imagenes[]', img));
+      await api.post(`/formularios/${res.data.id}/imagenes`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
+    }
 
-      if (estado === 'enviado') {
-        await api.patch(`/formularios/${res.data.id}/estado`, { estado: 'enviado' });
-      }
+    if (estado === 'enviado') {
+      await api.patch(`/formularios/${res.data.id}/estado`, { estado: 'enviado' });
+    }
 
-      navigate('/formularios');
+    navigate('/formularios');
     } catch (err) {
       setError(err.response?.data?.message || 'Error al guardar el formulario');
     } finally {
@@ -121,6 +137,17 @@ export default function NuevoFormulario() {
             )}
           </div>
         ))}
+        
+        {/*imagenes*/}
+        <div>
+          <label className="block text-sm text-gray-600 mb-1">Imágenes (opcional)</label>
+          <input type="file" multiple accept="image/*"
+            onChange={handleImagenes}
+            className="w-full border border-gray-200 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-400"/>
+          {imagenes.length > 0 && (
+            <p className="text-xs text-gray-400 mt-1">{imagenes.length} imagen(es) seleccionada(s)</p>
+          )}
+        </div>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>
