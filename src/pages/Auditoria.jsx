@@ -14,15 +14,15 @@ export default function Auditoria() {
 
   useEffect(() => { cargarAuditoria(); }, []);
   const cargarAuditoria = async () => {
-    try {
-      const res = await api.get('/auditoria');
-      setRegistros(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-};
+        try {
+        const res = await api.get('/auditoria');
+        setRegistros(res.data);
+        } catch (err) {
+        console.error(err);
+        } finally {
+        setLoading(false);
+        }
+    };
 
   return (
     <div className="p-8">
