@@ -233,16 +233,10 @@ export default function Formularios() {
                           className="text-xs text-green-600 hover:text-green-800 transition">
                           Validar
                         </button>
-                        <button onClick={() => cambiarEstado(f.id, 'denegado')}
-                          className="text-xs text-red-500 hover:text-red-700 transition">
-                          Denegar
-                        </button>
+                        <button onClick={() => cambiarEstado(f.id, 'denegado')}className="text-xs text-red-500 hover:text-red-700 transition">Denegar</button>
                       </>
                     )}
-                    <button onClick={() => exportarPdf(f.id)}
-                      className="text-xs text-orange-500 hover:text-orange-700 transition">
-                      PDF
-                    </button>
+                    <button onClick={() => exportarPdf(f.id)}className="text-xs text-orange-500 hover:text-orange-700 transition">PDF</button>
                   </td>
                 </tr>
               ))}
