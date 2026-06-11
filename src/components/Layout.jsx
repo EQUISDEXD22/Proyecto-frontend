@@ -62,7 +62,15 @@ export default function Layout() {
             }>
               Tipos de formulario
             </NavLink>
-)}
+          )}
+
+          {user?.rol === 'admin' && (
+            <NavLink to="/auditoria" className={({ isActive }) =>
+              `px-4 py-2 rounded text-sm transition ${isActive ? 'bg-orange-700 text-white' : 'text-orange-100 hover:bg-orange-500'}`
+            }>
+              Auditoría
+            </NavLink>
+          )}
         </nav>
 
         <div className="px-3 py-4 border-t border-orange-400">

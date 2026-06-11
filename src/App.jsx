@@ -8,6 +8,7 @@ import Usuarios from './pages/Usuarios';
 import Fichaje from './pages/Fichaje';
 import TiposFormulario from './pages/TiposFormulario';
 import Layout from './components/Layout';
+import Auditoria from './pages/Auditoria';
 
 /**
  * Define las rutas usando React Router.
@@ -50,6 +51,7 @@ export default function App() {
         {/* Rutas de administrador */}
         <Route path="usuarios" element={<RutaAdmin><Usuarios /></RutaAdmin>} />
         <Route path="tipos-formulario" element={<RutaAdmin><TiposFormulario /></RutaAdmin>} />
+        <Route path="auditoria" element={<RutaAdmin><Auditoria /></RutaAdmin>} />
       </Route>
     </Routes>
   );
